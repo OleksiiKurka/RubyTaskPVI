@@ -28,3 +28,52 @@ users = User.create([
     role_id: 3,
   },
 ])
+categories = Category.create([
+  {
+    name:"fun",
+    description:"fun fun",
+  },
+  {
+    name:"life",
+    description:"life life",
+  },
+  {
+    name:"work",
+    description:"work work",
+  },
+])
+posts = Post.create([
+  {
+    title:"first",
+    body:"first body",
+    user_id:1,
+    category_id:1,
+  },
+  {
+    title:"second",
+    body:"second body",
+    user_id:2,
+    category_id:2,
+  },
+  {
+    title:"third",
+    body:"third body",
+    user_id:3,
+    category_id:3,
+  },
+])
+
+tags = Tag.create([
+  {
+    tag: "tag 1",
+    post_id: 1
+  },
+  {
+    tag: "tag 2",
+    post_id: 1
+  },
+  {
+    tag: "tag 3",
+    post_id: 1
+  },
+])
