@@ -62,7 +62,6 @@ posts = Post.create([
     category_id:3,
   },
 ])
-
 tags = Tag.create([
   {
     tag: "tag 1",
@@ -75,5 +74,31 @@ tags = Tag.create([
   {
     tag: "tag 3",
     post_id: 1
+  },
+])
+comments = Comment.create([
+  {
+    post_id: 1,
+    replycomment_id: nil,
+    user_id: 1,
+    body: "first comment"
+  },
+  {
+    post_id: 1,
+    replycomment_id: 1,
+    user_id: 2,
+    body: "second comment"
+  },
+  {
+    post_id: 1,
+    replycomment_id: 2,
+    user_id:2,
+    body: "third comment"
+  },
+  {
+    post_id: 2,
+    replycomment_id: nil,
+    user_id: 3,
+    body: "fourth comment"
   },
 ])
