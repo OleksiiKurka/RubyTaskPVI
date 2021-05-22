@@ -1,25 +1,44 @@
-import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
 
+import React, { useContext, useEffect } from 'react';
 import './App.css';
-import MyCard from './components/MyCard/MyCard';
 import { DataContext } from './Context/DataContext';
-
+import SignIn from "./components/Auth/Signin"
+import UserPost from './components/Post/UserPost';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import SignUp from './components/Auth/Signup';
+import HomePage from './components/HomePage/HomePage';
+import Navbar from './components/Navbar/Navbar';
+import Post from './components/Post/Post';
 
 
 
 function App() {
-  
-    const {posts,GetPosts} = useContext(DataContext);
-    useEffect(GetPosts,[]);
 
-    return (
-      <div >
-        {
-          posts.map(x=> <MyCard key={`cards`+x.id }data={x}></MyCard>)
+  const { isAuthorized } = useContext(DataContext);
+
+
+  return (
+    <div >
+      <BrowserRouter>
+      <Navbar></Navbar>
+        {!isAuthorized() ?
+          <Switch>
+            <Route path="/signup"> <SignUp /> </Route>
+            <Route path="/signin"> <SignIn /> </Route>
+            <Route path="/"> <HomePage /> </Route>
+          </Switch>
+          :
+          <Switch>
+            <Route path="/MyPost">  <UserPost/> </Route>
+            <Route path="/Posts"><Post />  </Route>
+            <Route path="/"> <HomePage /> </Route>
+          </Switch>
+        
+
         }
-      </div>
-    );
-  }
+      </BrowserRouter>
+    </div>
+  );
+}
 
 export default App;

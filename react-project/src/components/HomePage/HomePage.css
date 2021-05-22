@@ -1,0 +1,43 @@
+.div-home{
+    height: 35em;
+    text-align: center;
+    vertical-align:middle;
+}
+
+.p-head {
+    font-size: 5em;
+    font-weight:bolder;
+}
+.p-text {
+    font-size: 2em;
+    font-style: italic;
+    font-weight:bolder;
+}
+.p-text-low {
+    font-size: 1.5em;
+}
+
+@media screen and (max-width:995px) {
+    .p-head {
+        font-size: 4em;
+        
+    }
+    .p-text {
+        font-size: 1.5em;
+    }
+    .p-text-low {
+        font-size: 1em;
+    }
+}
+@media screen and (max-width: 600px ) {
+    .p-head {
+        font-size: 3em;
+        
+    }
+    .p-text {
+        font-size: 1em;
+    }
+    .p-text-low {
+        font-size: 0.8em;
+    }
+}

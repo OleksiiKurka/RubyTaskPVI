@@ -6,21 +6,66 @@ export const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
 
-    const URL = "http://localhost:3000/";
-    const API = URL + "/api/v1/";
+
     const [posts, setPosts] = useState([]);
 
 
+    const [user, setUser] = useState({
+        username: localStorage.getItem("username"),
+        email: localStorage.getItem("email"),
+        token: localStorage.getItem("token"),
+    });
 
-    function GetPosts() {
-        axios.get(API + "posts",
-            {
-                headers: { "Authorization": "bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.oT7kSePnYs7eVIsRIzIi0UEC7XBclsrO3qrnXwic8Zg" }
-            }).then(x => {
-                setPosts(x.data);
-                console.log(x)
-            });
+    const setUserStore = (temp, value) => {
+        if (temp) {
+            localStorage.setItem("username", value.username);
+            localStorage.setItem("email", value.email);
+            localStorage.setItem("token", value.token);
+        }
+        setUser(value);
+    }
+    const clearState = () => {
+        localStorage.setItem("username", "");
+        localStorage.setItem("email", "");
+        localStorage.setItem("token", "");
+        setUser({
+            username: "",
+            email: "",
+            token: ""
+        });
     }
 
-    return <DataContext.Provider value={{ GetPosts,posts }}>{children}</DataContext.Provider>;
+    const isAuthorized = () => {
+        for (let temp in user) {
+            if (!user[temp])
+                return false
+        }
+        return true;
+    }
+
+    const [URL, setURL] = useState({
+        url: "http://localhost:3000",
+        api: "http://localhost:3000/api/v1",
+        posts: "/posts",
+        signin: "/login",
+        signup: "/user",
+        userPosts: "/userPosts",
+        headers: (val) => { return { headers: { 'Authorization': `bearer ${val}` } } }
+    });
+
+
+
+   
+    const objectTOsend = {
+        URL,
+        clearState,
+        posts,
+        setPosts,
+        user,
+        isAuthorized,
+        setUserStore
+    }
+
+
+    return <DataContext.Provider value={objectTOsend}>{children}</DataContext.Provider>;
 }
