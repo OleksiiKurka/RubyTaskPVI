@@ -2,7 +2,9 @@
     border-radius: 25px;
     padding: 1em;
 }
-
+li.borderless {
+    border: 0 none;
+}
 .avatar {
     max-width: 5em;
     max-height: 5em;

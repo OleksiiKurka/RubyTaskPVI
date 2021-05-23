@@ -1,11 +1,68 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "./MyCard.css"
+
+class commentsTree {
+
+  constructor(value) {
+    this.value = value
+    this.NextNode = []
+  }
+
+  addNode(Node) {
+    if (Node.value.replycomment_id !== this.value.id)
+      this.NextNode.forEach(x => x.addNode(Node));
+    else
+      this.NextNode = [...this.NextNode, Node]
+  }
+
+  display() {
+    return (
+      <>
+        <li className="list-group-item" key={`comment dist ${this.value.id}`}>
+          -{this.value.body}
+          {this.NextNode.length > 0 &&
+          this.NextNode.map(x => x.display())
+        }
+        </li>
+        
+      </>
+    )
+
+
+  }
+}
+
 
 function MyCard(props) {
 
   const [expanded, setExpanded] = React.useState(false);
-
+  const [tempcomment,setTempComment] = useState(null);
   //console.log( new Date(props.data.created_at.replace(' ', 'T')));
+  useEffect(
+    () => {
+
+      let temp = [...props.data.comments];
+      if (temp.length === 0)
+        return;
+      let temp2 = temp.filter(x => x.replycomment_id === null).map(y => ({ arr: [y.id], Tree: new commentsTree(y) }));
+      let temp3 = temp.filter(y => y.replycomment_id);
+      if (temp3.length === 0)
+        return;
+      temp3.forEach(x => {
+        temp2.forEach(z => {
+          if (z.arr.indexOf(x.replycomment_id) >= 0) {
+            z.Tree.addNode(new commentsTree(x));
+            z.arr.push(x.id);
+          }
+        })
+      }
+      );
+
+      setTempComment(temp2.map(x=>x.Tree.display()))
+      console.log(temp2[0].Tree.display());
+    }
+    , [])
+
 
   return (
 
@@ -16,11 +73,11 @@ function MyCard(props) {
           <div className="card-title mb-4">
             <div className="row">
               <div className="col-2">
-                <img className="rounded-circle z-depth-2 avatar" alt="100x100" src={`https://avatars.dicebear.com/api/avataaars/${props.data.id}.svg`}
+                <img className="rounded-circle z-depth-2 avatar" alt="100x100" src={`https://avatars.dicebear.com/api/avataaars/${props.data.user.id}.svg`}
                   data-holder-rendered="true" />
               </div>
               <div className="col-10 mt-3">
-                <h2>Oleksii Kurka</h2>
+                <h2>{props.data.user.first_name + " " + props.data.user.last_name}</h2>
                 <footer className="blockquote-footer"> 9 hours ago</footer>
               </div>
             </div>
@@ -30,16 +87,18 @@ function MyCard(props) {
           <p className="card-text">{props.data.body}</p>
 
           <button className="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target={`#posts ${props.data.id}`} aria-expanded="false" aria-controls={`posts ${props.data.id}`}>
-            See comments 
+            See comments
           </button>
-          
+
 
 
         </div>
         <div className="collapse mx-3" id={`posts ${props.data.id}`}>
           <div className="card card-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-            </div>
+            <ul className="list-group list-group-flush">
+              {tempcomment}
+            </ul>
+          </div>
         </div>
       </div>
 
