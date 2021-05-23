@@ -6,6 +6,8 @@
 * 4th commit: add Comment. Each comment has a link to another comment or null (easy way to reply to another one) 
 * 5th commit: fix some problem with front-end connection
 * 6th commit: add Serializer for Models
+* 7th commit: work with comments... Hard work((
+    
 # All commands
 ##### Commands to quickly rebuild the project if something went wrong. Hope everything will be fine))) 
 #### count how many times it helped me: 2 

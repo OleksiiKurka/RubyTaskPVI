@@ -1,9 +1,9 @@
 class Api::V1::PostsController < ApplicationController
   before_action :set_post, only: [:show, :update, :destroy]
-
+  before_action :checkRole, only: [:update, :destroy]
   # GET /posts
   def index
-    @posts = Post.all
+    @posts = Post.all.order("created_at DESC")
 
     render json: @posts
   end
@@ -14,7 +14,7 @@ class Api::V1::PostsController < ApplicationController
   end
 
   def showUserPosts
-    @posts = Post.find(@user.id)
+    @posts = Post.where(user_id:@user.id).order("created_at DESC")
     render json: @posts
   end 
 
@@ -27,9 +27,6 @@ class Api::V1::PostsController < ApplicationController
     category_id:post_params[:category_id],
     user_id:@user.id)
    
-   
-    
-    
     if @post.save
       render json: @post, status: :created
     else
@@ -52,7 +49,11 @@ class Api::V1::PostsController < ApplicationController
 
   # DELETE /posts/1
   def destroy
-    @post.destroy
+
+      @commetns = Comment.where(post_id:@post.id).order("created_at DESC")
+      @commetns.destroy_all
+      @post.destroy
+      render json: {message:"Deleted"}
   end
 
   private
@@ -61,6 +62,12 @@ class Api::V1::PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
+    def checkRole 
+      if @post.user_id != @user.id && @user.role_id != 1
+        render json:  {message:"Access denied"}
+        return
+      end
+    end
     # Only allow a list of trusted parameters through.
     def post_params
       params.require(:post).permit(:title, :body, :category_id)
