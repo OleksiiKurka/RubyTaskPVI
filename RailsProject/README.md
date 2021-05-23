@@ -4,7 +4,7 @@
 * 2nd commit: add User and Role. Add simple authorization with JWT. Add test controller to test it. 
 * 3rd commit: add Category, Post and Tag. For Post and Tags used "scaffold" command.  
 * 4th commit: add Comment. Each comment has a link to another comment or null (easy way to reply to another one) 
-
+* 5th commit: fix some problem with front-end connection
 # All commands
 ##### Commands to quickly rebuild the project if something went wrong. Hope everything will be fine))) 
 #### count how many times it helped me: 2 

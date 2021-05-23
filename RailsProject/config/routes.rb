@@ -9,7 +9,8 @@ Rails.application.routes.draw do
       resources :comments
       resources :tags
       resources :posts
-      get "test", to: "test#index"
+      get "userPosts", to: "posts#showUserPosts"
+      get "categories", to: "categories#index"
     end
   end
 end

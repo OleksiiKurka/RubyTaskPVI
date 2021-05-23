@@ -13,20 +13,37 @@ class Api::V1::PostsController < ApplicationController
     render json: @post
   end
 
+  def showUserPosts
+    @posts = Post.find(@user.id)
+    render json: @posts
+  end 
+
   # POST /posts
   def create
-    @post = Post.new(post_params)
 
+    @post = Post.new(
+    title:post_params[:title],
+    body:post_params[:body],
+    category_id:post_params[:category_id],
+    user_id:@user.id)
+   
+   
+    
+    
     if @post.save
-      render json: @post, status: :created, location: @post
+      render json: @post, status: :created
     else
       render json: @post.errors, status: :unprocessable_entity
+    end
+    
+    params[:tags].each do |n|
+       Tag.create(tag: n, post_id:@post.id)
     end
   end
 
   # PATCH/PUT /posts/1
   def update
-    if @post.update(post_params)
+    if @post.update(post_params,user_id:@user.id)
       render json: @post
     else
       render json: @post.errors, status: :unprocessable_entity
@@ -46,6 +63,6 @@ class Api::V1::PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :body, :category_id, :user_id)
+      params.require(:post).permit(:title, :body, :category_id)
     end
 end
