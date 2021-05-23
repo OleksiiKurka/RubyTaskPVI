@@ -9,3 +9,35 @@ li.borderless {
     max-width: 5em;
     max-height: 5em;
 }
+
+.input {
+    border: 0em;
+    border-bottom: 1px solid black;
+    border-radius: 0;
+    background-color: inherit;
+}
+
+.tags{
+    font-size: 1em;
+}
+
+.avatar-comment{
+    max-width: 4em;
+    max-height: 4em;
+}
+
+.comment-div{
+    border: 1px solid rgb(192, 191, 191);
+    border-radius: 10px;
+    background-color: whitesmoke;
+}
+
+.comment-p{
+    border: 1px solid rgb(209, 208, 208);
+    border-radius: 5px;
+    background-color: rgb(235, 233, 233)
+    
+}
+.categories{
+    font-size: 1.5em;
+}

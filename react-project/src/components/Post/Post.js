@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DataContext } from '../../Context/DataContext';
 import CreatePost from './CreatePost';
 import MyCard from './MyCard';
@@ -28,7 +28,7 @@ function Post() {
             <CreatePost></CreatePost>
             <div className="container">
                 {posts.length > 0 &&
-                    posts.map(x => <MyCard key={`cards` + x.id} data={x}></MyCard>)
+                    posts.map(x => <MyCard key={`cards` + x.id}  data={x}></MyCard>)
                 }
             </div>
         </>

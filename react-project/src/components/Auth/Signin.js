@@ -19,9 +19,11 @@ function SignIn() {
         axios.post(URL.url + URL.signin, { email: form["Email"].value, password: form["Password"].value },URL.headers(user.token)
             ).then(x => {
                 setUserStore(checkValOfBox.current.checked,{
-                    username: x.data.user.first_name,
-                    email: x.data.user.email,
-                    token: x.data.token
+                    username: x.data.first_name,
+                    email: x.data.email,
+                    token: x.data.token,
+                    user_id:x.data.id,
+                    user_role:x.data.role.role
                 });
                 console.log(x)
             }).catch((err)=>{if(err.message) alert("Wrong input data")});;

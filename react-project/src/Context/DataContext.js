@@ -8,12 +8,14 @@ export const DataProvider = ({ children }) => {
 
 
     const [posts, setPosts] = useState([]);
-    const [category,setCategory] = useState([]);
+    const [category, setCategory] = useState([]);
 
     const [user, setUser] = useState({
         username: localStorage.getItem("username"),
         email: localStorage.getItem("email"),
         token: localStorage.getItem("token"),
+        user_id: localStorage.getItem("user_id"),
+        user_role: localStorage.getItem("user_role"),
     });
 
     const setUserStore = (temp, value) => {
@@ -21,6 +23,8 @@ export const DataProvider = ({ children }) => {
             localStorage.setItem("username", value.username);
             localStorage.setItem("email", value.email);
             localStorage.setItem("token", value.token);
+            localStorage.setItem("user_id", value.user_id);
+            localStorage.setItem("user_role", value.user_role);
         }
         setUser(value);
     }
@@ -28,11 +32,15 @@ export const DataProvider = ({ children }) => {
         localStorage.setItem("username", "");
         localStorage.setItem("email", "");
         localStorage.setItem("token", "");
-        setUser({
-            username: "",
-            email: "",
-            token: ""
-        });
+        localStorage.setItem("user_id", "");
+            localStorage.setItem("user_role", "");
+            setUser({
+                username: "",
+                email: "",
+                token: "",
+                user_id: "",
+                user_role: ""
+            });
     }
 
     const isAuthorized = () => {
@@ -49,13 +57,15 @@ export const DataProvider = ({ children }) => {
         posts: "/posts",
         signin: "/login",
         signup: "/user",
-        category:"/categories",
+        category: "/categories",
         userPosts: "/userPosts",
+        addComment: "/comments",
+        deletePost: "/posts",
         headers: (val) => { return { headers: { 'Authorization': `bearer ${val}` } } }
     });
 
 
-   
+
     const objectTOsend = {
         URL,
         clearState,

@@ -28,9 +28,11 @@ function UserPost() {
     return (
         <>
             <CreatePost></CreatePost>
-            {posts.length > 0 &&
+            <div className="container">
+                {posts.length > 0 &&
 
-                posts.map(x => <MyCard key={`cards` + x.id} data={x}></MyCard>)}
+                    posts.map(x => <MyCard key={`cards` + x.id} data={x}></MyCard>)}
+            </div>
         </>
     )
 
