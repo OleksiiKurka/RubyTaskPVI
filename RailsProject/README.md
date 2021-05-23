@@ -5,6 +5,7 @@
 * 3rd commit: add Category, Post and Tag. For Post and Tags used "scaffold" command.  
 * 4th commit: add Comment. Each comment has a link to another comment or null (easy way to reply to another one) 
 * 5th commit: fix some problem with front-end connection
+* 6th commit: add Serializer for Models
 # All commands
 ##### Commands to quickly rebuild the project if something went wrong. Hope everything will be fine))) 
 #### count how many times it helped me: 2 
@@ -20,3 +21,5 @@
     - rails g scaffold Tag tag:string post:references
 * 4th commit:
     - rails g scaffold Comment body:string user:references post:references replycomment:references
+* 6th commit: 
+    - rails g serializers User (Post or Tag ...)

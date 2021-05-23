@@ -6,8 +6,8 @@ class UserController < ApplicationController
       @user = User.create(user_params)
       if @user.valid?
         token = encode_token({user_id: @user.id})
-        render json: {user: @user, token: token}
-      else
+        render json: {user: @user, token: token }
+      else 
         render json: {error: "Invalid username or password"},status: :bad_request
       end
     end
