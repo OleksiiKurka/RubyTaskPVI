@@ -6,10 +6,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      get "userPosts", to: "posts#showUserPosts"
       resources :comments
       resources :tags
       resources :posts
-      get "userPosts", to: "posts#showUserPosts"
       get "categories", to: "categories#index"
     end
   end

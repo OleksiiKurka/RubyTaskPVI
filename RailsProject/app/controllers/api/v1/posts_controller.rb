@@ -4,18 +4,17 @@ class Api::V1::PostsController < ApplicationController
   # GET /posts
   def index
     @posts = Post.all.order("created_at DESC")
-
-    render json: @posts
+    .paginate(:per_page => 2,:page => params[:page])
+    
+    render json: @posts, page_count:@posts.total_pages
   end
 
-  # GET /posts/1
-  def show
-    render json: @post
-  end
 
   def showUserPosts
     @posts = Post.where(user_id:@user.id).order("created_at DESC")
-    render json: @posts
+    .paginate(:per_page => 2,:page => params[:page])
+
+    render json: @posts, page_count:@posts.total_pages
   end 
 
   # POST /posts
