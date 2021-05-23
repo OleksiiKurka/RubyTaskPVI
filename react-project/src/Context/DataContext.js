@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import axios from 'axios';
+
 
 export const DataContext = createContext();
 
@@ -8,7 +8,7 @@ export const DataProvider = ({ children }) => {
 
 
     const [posts, setPosts] = useState([]);
-
+    const [category,setCategory] = useState([]);
 
     const [user, setUser] = useState({
         username: localStorage.getItem("username"),
@@ -43,16 +43,16 @@ export const DataProvider = ({ children }) => {
         return true;
     }
 
-    const [URL, setURL] = useState({
+    const [URL] = useState({
         url: "http://localhost:3000",
         api: "http://localhost:3000/api/v1",
         posts: "/posts",
         signin: "/login",
         signup: "/user",
+        category:"/categories",
         userPosts: "/userPosts",
         headers: (val) => { return { headers: { 'Authorization': `bearer ${val}` } } }
     });
-
 
 
    
@@ -63,7 +63,9 @@ export const DataProvider = ({ children }) => {
         setPosts,
         user,
         isAuthorized,
-        setUserStore
+        setUserStore,
+        category,
+        setCategory
     }
 
 

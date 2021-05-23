@@ -73,7 +73,7 @@ function SignUp(params) {
 
                                 <textarea  name={"About"} className="form-control input mt-4" rows="1"></textarea>
                                 <div className="mt-3 col-lg-12 d-flex justify-content-end">
-                                    <button type="submit" onClick={(ev) => sighIn(ev)} className="btn btn-primary">Sign in</button>
+                                    <button type="submit" onClick={(ev) => sighIn(ev)} className="btn btn-primary">Sign up</button>
                                 </div>
                             </form>
                             <div className="singup-nav-div my-4">

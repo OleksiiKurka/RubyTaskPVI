@@ -1,56 +1,53 @@
 import React from 'react';
-import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, IconButton, makeStyles, Typography } from '@material-ui/core';
-import { red } from '@material-ui/core/colors';
-import clsx from 'clsx';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: 345,
-    margin: "auto",
-    marginTop:20,
-    backgroundColor:"#f0f7e1",
-  },
-  media: {
-    height: 0,
-    paddingTop: "0%"//'56.25%', // 16:9
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-  avatar: {
-    backgroundColor: red[500],
-  },
-}));
+import "./MyCard.css"
 
 function MyCard(props) {
 
-  const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  //console.log( new Date(props.data.created_at.replace(' ', 'T')));
 
   return (
-    <div >
+
+    <div className="mb-4" >
+      <div className="card m-auto w-75 cards-div" >
+        <div className="card-body">
+
+          <div className="card-title mb-4">
+            <div className="row">
+              <div className="col-2">
+                <img className="rounded-circle z-depth-2 avatar" alt="100x100" src={`https://avatars.dicebear.com/api/avataaars/${props.data.id}.svg`}
+                  data-holder-rendered="true" />
+              </div>
+              <div className="col-10 mt-3">
+                <h2>Oleksii Kurka</h2>
+                <footer className="blockquote-footer"> 9 hours ago</footer>
+              </div>
+            </div>
+          </div>
+
+          <h2 className="card-subtitle mb-2 text-muted">{props.data.title}</h2>
+          <p className="card-text">{props.data.body}</p>
+
+          <button className="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target={`#posts ${props.data.id}`} aria-expanded="false" aria-controls={`posts ${props.data.id}`}>
+            See comments 
+          </button>
+          
+
+
+        </div>
+        <div className="collapse mx-3" id={`posts ${props.data.id}`}>
+          <div className="card card-body">
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+            </div>
+        </div>
+      </div>
+
+      {/*
       <Card className={classes.root}>
         <CardHeader
 
-          avatar={
-            <Avatar aria-label="recipe" className={classes.avatar}>
-              {props.data.id}
-          </Avatar>
-          }
+
           title={props.data.title}
           subheader={props.data.created_at}
         />
@@ -62,12 +59,12 @@ function MyCard(props) {
 
 
         <CardContent>
-          <Typography variant="body2"  component="p">
-           {props.data.body}
-        </Typography>
+          <Typography variant="body2" component="p">
+            {props.data.body}
+          </Typography>
         </CardContent>
 
-       
+
         <CardActions disableSpacing>
 
           <IconButton aria-label="add to favorites">
@@ -91,7 +88,7 @@ function MyCard(props) {
           </IconButton>
         </CardActions>
 
- {/*
+        {/*
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>Method:</Typography>
@@ -101,9 +98,9 @@ function MyCard(props) {
           </Typography>
           </CardContent>
         </Collapse>
-        */}
-      </Card>
-    </div>
+        /}
+        </Card>*/}
+    </div >
   );
 }
 

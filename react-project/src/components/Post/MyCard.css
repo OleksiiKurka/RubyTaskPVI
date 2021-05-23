@@ -1,0 +1,9 @@
+.cards-div {
+    border-radius: 25px;
+    padding: 1em;
+}
+
+.avatar {
+    max-width: 5em;
+    max-height: 5em;
+}

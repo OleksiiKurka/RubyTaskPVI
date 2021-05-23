@@ -6,7 +6,7 @@ import { DataContext } from '../../Context/DataContext';
 import axios from 'axios';
 
 function SignIn() {
-    const { URL,headers,setUserStore,user } = useContext(DataContext);
+    const { URL,setUserStore,user } = useContext(DataContext);
     const FormInputs = useRef(null);
     const checkValOfBox = useRef(null);
 
@@ -62,11 +62,6 @@ return (
                 </div>
             </div>
         </div>
-        {/*<form ref={formInput} className={classes.root } autoComplete="off">
-            <TextField  type="email" className={classes.input } name={"Email"} label="Email" />
-            <TextField  type="password" className={classes.input } name={"Password"}label="Password" />
-            <Button onClick={logIn} variant="outlined">Submit</Button>
-        </form>*/}
     </div>
 )
 
