@@ -45,7 +45,7 @@ function MyCard(props) {
       ev.preventDefault();
       let form = this.FormRef.current;
       if (form["Comment"].value.trim() === "") { alert("empty field"); return; }
-
+      debugger
       axios.post(URL.api + URL.addComment, {
         body: form["Comment"].value,
         replycomment_id: this.value.id,
@@ -71,7 +71,7 @@ function MyCard(props) {
               <p className="text-muted ml-3 mt-3 comment-p p-1">{this.value.body}</p>
               <div className="d-flex">
                 <a href="#" className="link-primary ml-auto" type="button" data-toggle="collapse" data-target={`#comment ${this.value.id}`} aria-expanded="false" aria-controls={`comment ${this.value.id}`}>
-                  reply for comment
+                  reply to comment
                 </a>
               </div>
               <div className="collapse mx-1" id={`comment ${this.value.id}`}>
@@ -81,8 +81,6 @@ function MyCard(props) {
                       <input type="text" name={"Comment"} className="form-control input" placeholder="Your reply comment" aria-label="Recipient's username" aria-describedby="button-addon2" />
                       <a className="btn btn-outline-secondary ml-3" onClick={(ev) => this.postComment(ev)} type="button" id="button-addon2">Post</a>
                     </div>
-
-
                   </form>
                 </div>
               </div>
@@ -111,7 +109,8 @@ function MyCard(props) {
       body: form["CommentToPost"].value,
       post_id: props.data.id
     }, URL.headers(user.token)
-    ).catch((err) => { if (err.message) alert("Wrong input data") });;
+    ).then(x=>alert("Posted please reload page")).catch((err) => { if (err.message) alert("Wrong input data") });
+
   }
 
 

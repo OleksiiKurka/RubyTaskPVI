@@ -7,7 +7,6 @@ export const DataContext = createContext();
 export const DataProvider = ({ children }) => {
 
 
-    const [posts, setPosts] = useState([]);
     const [category, setCategory] = useState([]);
 
     const [user, setUser] = useState({
@@ -69,8 +68,6 @@ export const DataProvider = ({ children }) => {
     const objectTOsend = {
         URL,
         clearState,
-        posts,
-        setPosts,
         user,
         isAuthorized,
         setUserStore,
