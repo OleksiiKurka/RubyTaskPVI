@@ -8,6 +8,7 @@
 * 6th commit: add Serializer for Models
 * 7th commit: work with comments... Hard work((
 * 8th commit: add pagination for post, add delete od post (user can del only his own. Admin can del all posts)
+* 9th commit: add search by Title/Tags/Category
     
 # All commands
 ##### Commands to quickly rebuild the project if something went wrong. Hope everything will be fine))) 

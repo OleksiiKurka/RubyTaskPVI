@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get "userPosts", to: "posts#showUserPosts"
+      get "findPostByTittle", to: "posts#findByTitle"
+      get "findPostByTags", to: "posts#findByTags"
+      get "findPostByCategory", to: "posts#findByCategory"
       resources :comments
       resources :tags
       resources :posts

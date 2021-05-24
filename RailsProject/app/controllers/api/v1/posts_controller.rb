@@ -17,6 +17,28 @@ class Api::V1::PostsController < ApplicationController
     render json: @posts, page_count:@posts.total_pages
   end 
 
+
+  def findByTitle
+    @posts = Post.where("title like ?", "%#{params[:value]}%")
+    render json: @posts
+  end
+
+
+  def findByTags
+    tmp = Tag.where(tag:params[:value]).pluck(:post_id)
+    @posts = Post.where(id:tmp)
+    
+
+   render json: @posts
+  end
+
+  def findByCategory
+    categId = Category.where(name:params[:value]).pluck(:id)
+    @posts = Post.where(category_id:categId)
+
+
+    render json: @posts
+  end
   # POST /posts
   def create
 
