@@ -3,17 +3,17 @@ import React, { createRef, useContext, useEffect, useRef, useState } from 'react
 import { DataContext } from '../../Context/DataContext';
 import "./MyCard.css"
 
-
 function MyCard(props) {
 
   const { URL, user, } = useContext(DataContext);
 
   class commentsTree {
 
-    constructor(value) {
+    constructor(value,GetPate) {
       this.value = value;
       this.NextNode = [];
       this.FormRef = createRef(null);
+      this.GetPage = GetPate
     }
 
     addNode(Node) {
@@ -45,13 +45,12 @@ function MyCard(props) {
       ev.preventDefault();
       let form = this.FormRef.current;
       if (form["Comment"].value.trim() === "") { alert("empty field"); return; }
-      debugger
       axios.post(URL.api + URL.addComment, {
         body: form["Comment"].value,
         replycomment_id: this.value.id,
         post_id: props.data.id
       }, URL.headers(user.token)
-      ).catch((err) => { if (err.message) alert("Wrong input data") });;
+      ).then(x => { alert("Comment added reload page");}).catch((err) => { if (err.message) alert("Wrong input data") });;
 
     }
     display() {
@@ -109,8 +108,8 @@ function MyCard(props) {
       body: form["CommentToPost"].value,
       post_id: props.data.id
     }, URL.headers(user.token)
-    ).then(x=>alert("Posted please reload page")).catch((err) => { if (err.message) alert("Wrong input data") });
-
+    ).then(x => { alert("Posted please reload page");  props.getPage(0);}).catch((err) => { if (err.message) alert("Wrong input data") });
+   
   }
 
 
@@ -129,8 +128,8 @@ function MyCard(props) {
       timeElement.current.innerText = `${now.getHours() - 3 - tempTime.getHours()} hours ago`;
     else if (now.getMinutes() - tempTime.getMinutes())
       timeElement.current.innerText = `${now.getMinutes() - tempTime.getMinutes()} minutes ago`;
-      else return  timeElement.current.innerText =`< minute ago`;
-  } 
+    else return timeElement.current.innerText = `< minute ago`;
+  }
 
 
   useEffect(
@@ -163,8 +162,21 @@ function MyCard(props) {
 
   const deletePost = () => {
     axios.delete(URL.api + URL.deletePost + "/" + props.data.id, URL.headers(user.token)
-    ).then(x => alert(x.data.message)).catch((err) => { if (err.message) alert("Wrong input data") });;
+    ).then(x => { alert(x.data.message); props.getPage(0); }).catch((err) => { if (err.message) alert("Wrong input data") });;
 
+  }
+
+  const like = () => {
+
+    if (!props.data.likes.find(x => x.user_id == user.user_id)) {
+      axios.post(URL.api + URL.addLike, { post_id: props.data.id }, URL.headers(user.token)
+      ).then(x => {alert(x.data.message); props.getPage(0);}).catch((err) => { if (err.message) alert("Wrong input data") });;
+    }
+    else {
+      axios.delete(URL.api + URL.deleteLike + "?post_id=" + props.data.id, URL.headers(user.token)
+      ).then(x => {alert(x.data.message); props.getPage(0);}).catch((err) => { if (err.message) alert("Wrong input data") });;
+    }
+   
   }
   return (
 
@@ -177,7 +189,7 @@ function MyCard(props) {
                 <img className="rounded-circle z-depth-2 avatar" alt="100x100" src={`https://avatars.dicebear.com/api/avataaars/${props.data.user.id}.svg`}
                   data-holder-rendered="true" />
               </div>
-              <div className="col-8 mt-3">
+              <div className="col-7 mt-3">
                 <h2 className="d-inline">{props.data.user.first_name + " " + props.data.user.last_name}</h2>
 
                 {
@@ -189,10 +201,11 @@ function MyCard(props) {
                 <footer ref={timeElement} className="blockquote-footer"> </footer>
               </div>
 
-              <div className="col-2 mt-3" >
-                <div className="">
-
-                  <button className="badge badge-secondary categories float-right">{props.data.category.name}</button>
+              <div className="col-3 mt-3" >
+                <div className="d-flex justify-content-end">
+                  <h4 className="mr-1 mt-1">{props.data.likes.length}</h4>
+                  <i onClick={() => like()} className={`fas fa-heart mr-2 ${props.data.likes.find(x => x.user_id == user.user_id) ? "liked" : "notliked"}`}></i>
+                  <button className="badge badge-secondary categories">{props.data.category.name}</button>
                 </div>
               </div>
             </div>

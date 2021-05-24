@@ -59,6 +59,8 @@ export const DataProvider = ({ children }) => {
         userPosts: "/userPosts",
         addComment: "/comments",
         deletePost: "/posts",
+        addLike: "/likes",
+        deleteLike: "/likes",
         headers: (val) => { return { headers: { 'Authorization': `bearer ${val}` } } }
     });
 

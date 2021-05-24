@@ -10,11 +10,7 @@ import MyCard from './MyCard';
 function Search() {
     const [posts, setPosts] = useState([]);
     const { URL, user } = useContext(DataContext)
-    const [page, setPage] = useState([1]);
-    const [pagePageCount, setPageCount] = useState(1);
     const findByRef = useRef(null);
-    const [tempP, settepmP] = useState("");
-    const [tempPurl, settepmPurl] = useState("");
     const [category, setCategory] = useState([]);
     const [tags, setTags] = useState([]);
 
@@ -110,14 +106,6 @@ function Search() {
                             </select>
                             <a className="btn btn-outline-secondary ml-3" onClick={(ev) => getPage("/findPostByCategory")} type="button">Find by Category</a>
                         </div>
-
-
-
-
-
-
-
-
                     </form>
                 </div>
             </div>

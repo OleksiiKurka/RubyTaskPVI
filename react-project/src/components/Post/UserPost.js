@@ -30,16 +30,16 @@ function UserPost() {
     const getPage = (val) => {
         if (page[0] + val > pagePageCount || page[0] + val < 1)
             return;
-        setPage(x => [x[0] + val]);
 
         axios.get(URL.api + URL.userPosts + "?page=" + page[0], URL.headers(user.token))
             .then(x => {
                 if (Array.isArray(x.data))
-                    setPosts([...x.data]);
+                    setPosts(x.data);
                 else
                     setPosts([x.data]);
-                    setPageCount(x.data[0].page_count);
+                setPageCount([x.data[0].page_count]);
             }).catch((err) => { if (err.message) alert("Error") });
+        setPage(x => [x[0] + val]);
     }
 
 
@@ -52,13 +52,13 @@ function UserPost() {
                     posts.map(x => <MyCard key={`cards` + x.id} getPage={getPage} data={x}></MyCard>)}
             </div>
             <ul className="pagination justify-content-center">
-            {page[0] > 1 &&
-                <li className="page-item"><a onClick={() => getPage(-1)} className="page-link" href="#">Previous</a></li>
-            }
-            {page[0] < pagePageCount &&
-                <li className="page-item"><a onClick={() => getPage(1)} className="page-link" href="#">Next</a></li>
-            }
-        </ul>
+                {page[0] > 1 &&
+                    <li className="page-item"><a onClick={() => getPage(-1)} className="page-link" href="#">Previous</a></li>
+                }
+                {page[0] < pagePageCount &&
+                    <li className="page-item"><a onClick={() => getPage(1)} className="page-link" href="#">Next</a></li>
+                }
+            </ul>
         </>
     )
 

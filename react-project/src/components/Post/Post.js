@@ -30,8 +30,6 @@ function Post() {
     const getPage = (val) => {
         if (page[0] + val > pagePageCount || page[0] + val < 1)
             return;
-        setPage(x => [x[0] + val]);
-
         axios.get(URL.api + URL.posts + "?page=" + page[0], URL.headers(user.token))
             .then(x => {
                 if (Array.isArray(x.data))
@@ -40,9 +38,9 @@ function Post() {
                     setPosts([x.data]);
                 console.log(x);
                 if (pagePageCount != x.data[0].page_count)
-                    setPageCount(x.data.page_count);
+                    setPageCount([x.data[0].page_count]);
             }).catch((err) => { if (err.message) alert("Error") });
-
+        setPage(x => [x[0] + val]);
     }
 
     return (
@@ -50,7 +48,7 @@ function Post() {
             <CreatePost></CreatePost>
             <div className="container">
                 {posts &&
-                    posts.map(x => <MyCard key={`cards` + x.id} data={x}></MyCard>)
+                    posts.map(x => <MyCard getPage={getPage} key={`cards` + x.id} data={x}></MyCard>)
                 }
             </div>
 
