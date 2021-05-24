@@ -7,8 +7,6 @@ export const DataContext = createContext();
 export const DataProvider = ({ children }) => {
 
 
-    const [category, setCategory] = useState([]);
-
     const [user, setUser] = useState({
         username: localStorage.getItem("username"),
         email: localStorage.getItem("email"),
@@ -53,6 +51,7 @@ export const DataProvider = ({ children }) => {
     const [URL] = useState({
         url: "http://localhost:3000",
         api: "http://localhost:3000/api/v1",
+        tags: "/tags",
         posts: "/posts",
         signin: "/login",
         signup: "/user",
@@ -70,9 +69,7 @@ export const DataProvider = ({ children }) => {
         clearState,
         user,
         isAuthorized,
-        setUserStore,
-        category,
-        setCategory
+        setUserStore
     }
 
 

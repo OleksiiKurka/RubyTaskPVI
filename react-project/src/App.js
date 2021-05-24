@@ -9,6 +9,7 @@ import SignUp from './components/Auth/Signup';
 import HomePage from './components/HomePage/HomePage';
 import Navbar from './components/Navbar/Navbar';
 import Post from './components/Post/Post';
+import Search from './components/Post/Search';
 
 
 
@@ -31,6 +32,7 @@ function App() {
           <Switch>
             <Route path="/MyPost">  <UserPost/> </Route>
             <Route path="/Posts"><Post />  </Route>
+            <Route path="/Search"><Search/></Route>
             <Route path="/"> <HomePage /> </Route>
           </Switch>
         

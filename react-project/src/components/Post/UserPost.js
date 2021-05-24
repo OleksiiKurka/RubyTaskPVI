@@ -38,7 +38,7 @@ function UserPost() {
                     setPosts([...x.data]);
                 else
                     setPosts([x.data]);
-                    setPageCount(x.data.page_count);
+                    setPageCount(x.data[0].page_count);
             }).catch((err) => { if (err.message) alert("Error") });
     }
 

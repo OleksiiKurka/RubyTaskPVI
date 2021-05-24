@@ -27,6 +27,7 @@ function Navbar(params) {
                             <>
                                 <NavLink to="/Posts" className="nav-item nav-link" >Posts</NavLink>
                                 <NavLink to="/MyPost" className="nav-item nav-link">My Posts</NavLink>
+                                <NavLink to="/Search" className="nav-item nav-link">Search Posts</NavLink>
                                 <button onClick={()=>clearState()} className="nav-item nav-link btn btn-secondary text-white ">Log out </button>
                             </>
                         }

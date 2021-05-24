@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { DataContext } from '../../Context/DataContext';
 
 import "./CreatePost.css"
@@ -9,8 +9,8 @@ import "./CreatePost.css"
 function CreatePost(props) {
 
     const FormInputs = useRef(null);
-    const { URL, user, category, setCategory } = useContext(DataContext);
-
+    const { URL, user } = useContext(DataContext);
+    const [category,setCategory] = useState([]);
     useEffect(() => {
         axios.get(URL.api + URL.category, URL.headers(user.token))
             .then(x => {
@@ -43,7 +43,6 @@ function CreatePost(props) {
          },URL.headers(user.token)).then(x => {
             alert("Posted please reload page")
          }).catch((err) => { if (err.message) alert("Wrong input data") });
-         props.getPage(0);
 
     }
     return (
