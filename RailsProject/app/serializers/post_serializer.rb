@@ -4,7 +4,7 @@ class PostSerializer < ActiveModel::Serializer
   belongs_to :category
   has_many :comments
   has_many :tags
-
+  has_many :likes
   def page_count
     @instance_options[:page_count]
   end

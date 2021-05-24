@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  
   post "/user", to: "user#create"
   post "/login", to: "user#login"
   get "/auto_login", to: "user#auto_login"
@@ -7,9 +8,11 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get "userPosts", to: "posts#showUserPosts"
+      delete "likes", to: "likes#destroy"
       get "findPostByTittle", to: "posts#findByTitle"
       get "findPostByTags", to: "posts#findByTags"
       get "findPostByCategory", to: "posts#findByCategory"
+      resources :likes
       resources :comments
       resources :tags
       resources :posts

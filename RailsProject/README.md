@@ -9,6 +9,7 @@
 * 7th commit: work with comments... Hard work((
 * 8th commit: add pagination for post, add delete od post (user can del only his own. Admin can del all posts)
 * 9th commit: add search by Title/Tags/Category
+* 10th commit: add Likes
     
 # All commands
 ##### Commands to quickly rebuild the project if something went wrong. Hope everything will be fine))) 
@@ -27,3 +28,5 @@
     - rails g scaffold Comment body:string user:references post:references replycomment:references
 * 6th commit: 
     - rails g serializers User (Post or Tag ...)
+* 10th commit:
+    - rails g scaffold Like user:references post:references
