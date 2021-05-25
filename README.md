@@ -1,5 +1,5 @@
 # RubyTaskPVI
-
+(в RailsProject є опис комітів, що за що відповідає)
 
 # DONE
 
