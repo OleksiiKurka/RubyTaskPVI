@@ -12,7 +12,7 @@
 * 2 Json api + React app 
 * 2 JWT (токен якого по галочці remember me збірігається в localstorage)
 * 2 пагінація
-* 3 розгортання на heroke фронта і беку
+* 3 розгортання на heroke фронта і беку (через то що хероку трохи словпок то перше підгрузка інфи з беку може зайняти час. Дальше все працюватиме добре, а то настрахався що в мене бек впав коли наступного дня пробував зайти на сайт)
 - [https://murmuring-plateau-02653.herokuapp.com/api/v1/posts](https://murmuring-plateau-02653.herokuapp.com/api/v1/posts) туткай можна побачити як бек відповідає коли пробуємо використати апі без токена
 - [https://guarded-bayou-10290.herokuapp.com/](https://guarded-bayou-10290.herokuapp.com/) туткай сидить react. 
 
